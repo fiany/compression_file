@@ -19,7 +19,7 @@ public class FileOperator extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(FileOperator.class.getResource("/xml/fileOperator.fxml"));
-        stage.setTitle("file Welcome");
+        stage.setTitle("文件压缩工具");
         stage.setScene(new Scene(root, 300, 275));
         stage.show();
     }

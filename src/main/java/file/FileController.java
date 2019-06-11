@@ -2,6 +2,7 @@ package file;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -16,6 +17,9 @@ import java.util.List;
 public class FileController {
     @FXML
     private Text actiontarget;
+
+    @FXML
+    private TextField chooserDir;
 
     private Stage stage;
 
@@ -33,6 +37,7 @@ public class FileController {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("选择需要压缩的文件夹");
         File file = directoryChooser.showDialog(stage);
+        chooserDir.setText(file.getAbsolutePath());
         List<File> fileList = getFileList(file.getAbsolutePath());
 //        FileChooser fileChooser = new FileChooser();
 //        fileChooser.setTitle("Open Resource File");
