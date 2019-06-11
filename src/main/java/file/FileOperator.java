@@ -22,7 +22,6 @@ public class FileOperator extends Application {
         stage.setTitle("file Welcome");
         stage.setScene(new Scene(root, 300, 275));
         stage.show();
-
     }
 
 }

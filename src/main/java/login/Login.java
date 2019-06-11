@@ -99,7 +99,7 @@ public class Login extends Application {
             }
         });
 
-        grid.setGridLinesVisible(true);//µ±Ê¹ÓÃGridPaneÊ±£¬ÎªÁË±ãÓÚµ÷ÊÔ£¬Äã¿ÉÒÔÏÔÊ¾Íø¸ñÏß¡£
+        grid.setGridLinesVisible(true);//å½“ä½¿ç”¨GridPaneæ—¶ï¼Œä¸ºäº†ä¾¿äºè°ƒè¯•ï¼Œä½ å¯ä»¥æ˜¾ç¤ºç½‘æ ¼çº¿ã€‚
         Scene scene = new Scene(grid, 300, 275);
 //        Scene scene = new Scene(grid);
         primaryStage.setScene(scene);

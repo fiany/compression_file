@@ -33,7 +33,7 @@ public class ColorfulCircles extends Application {
 		Scene scene = new Scene(root, 800, 600, Color.BLACK);
 		primaryStage.setScene(scene);
 
-		// ÔÚ´úÂëĞĞpromaryStage.show()Ö®Ç°Ìí¼ÓÀı7-2ÖĞµÄ´úÂëÀ´Ìí¼Ó30¸öÔ²È¦
+		// åœ¨ä»£ç è¡ŒpromaryStage.show()ä¹‹å‰æ·»åŠ ä¾‹7-2ä¸­çš„ä»£ç æ¥æ·»åŠ 30ä¸ªåœ†åœˆ
 		Group circles = new Group();
 		for (int i = 0; i < 30; i++) {
 			Circle circle = new Circle(150, Color.web("white", 0.05));
@@ -42,7 +42,7 @@ public class ColorfulCircles extends Application {
 			circle.setStrokeWidth(10);
 			circles.getChildren().add(circle);
 		}
-		// ÏÖÔÚÎÒÃÇÀ´´´½¨Ò»¸ö´øÓĞÏßĞÔ½¥±äµÄ¾ØĞÎ£¬´úÂëÈçÀı7-4ËùÊ¾¡£½«´úÂë²åÈëµ½´úÂëĞĞroot.getChildren().add(circles)Ö®Ç°£¬ÕâÑùÊ¹µÃ½¥±ä¾ØĞÎÏÔÊ¾µ½Ô²È¦µÄºóÃæ
+		// ç°åœ¨æˆ‘ä»¬æ¥åˆ›å»ºä¸€ä¸ªå¸¦æœ‰çº¿æ€§æ¸å˜çš„çŸ©å½¢ï¼Œä»£ç å¦‚ä¾‹7-4æ‰€ç¤ºã€‚å°†ä»£ç æ’å…¥åˆ°ä»£ç è¡Œroot.getChildren().add(circles)ä¹‹å‰ï¼Œè¿™æ ·ä½¿å¾—æ¸å˜çŸ©å½¢æ˜¾ç¤ºåˆ°åœ†åœˆçš„åé¢
 		Rectangle colors = new Rectangle(scene.getWidth(), scene.getHeight(),
 				new LinearGradient(0f, 1f, 1f, 0f, true, CycleMethod.NO_CYCLE,
 						new Stop[] { new Stop(0, Color.web("#f8bd55")), new Stop(0.14, Color.web("#c0fe56")),
@@ -52,27 +52,27 @@ public class ColorfulCircles extends Application {
 		colors.widthProperty().bind(scene.widthProperty());
 		colors.heightProperty().bind(scene.heightProperty());
 
-		// ÃÉ°æ»ìºÏĞ§¹ûÀ´Ê¹scene±ä°µ
+		// è’™ç‰ˆæ··åˆæ•ˆæœæ¥ä½¿sceneå˜æš—
 		Group blendModeGroup = new Group(
 				new Group(new Rectangle(scene.getWidth(), scene.getHeight(), Color.BLACK), circles), colors);
 		colors.setBlendMode(BlendMode.OVERLAY);
 		root.getChildren().add(blendModeGroup);
-		// ÕâĞĞ´úÂë½«Ä£ºı·¶Î§ÉèÖÃÎª10ÏñËØ¸ß*10ÏñËØ¿í¡¢Ä£ºıµü´ú´ÎÊıÉèÖÃÎª3£¬Ëü²úÉúÁËµÄĞ§¹ûÓë¸ßË¹Ä£ºıÀàËÆ¡£ÕâÖÖÄ£ºıÉú³É¼¼ÊõÔÚÔ²È¦µÄ±ßÔµ´¦²úÉúÁËÒ»ÖÖÆ½»¬µÄĞ§¹û
+		// è¿™è¡Œä»£ç å°†æ¨¡ç³ŠèŒƒå›´è®¾ç½®ä¸º10åƒç´ é«˜*10åƒç´ å®½ã€æ¨¡ç³Šè¿­ä»£æ¬¡æ•°è®¾ç½®ä¸º3ï¼Œå®ƒäº§ç”Ÿäº†çš„æ•ˆæœä¸é«˜æ–¯æ¨¡ç³Šç±»ä¼¼ã€‚è¿™ç§æ¨¡ç³Šç”ŸæˆæŠ€æœ¯åœ¨åœ†åœˆçš„è¾¹ç¼˜å¤„äº§ç”Ÿäº†ä¸€ç§å¹³æ»‘çš„æ•ˆæœ
 		circles.setEffect(new BoxBlur(10, 10, 3));
 
-		// Ìí¼Ó¶¯»­
+		// æ·»åŠ åŠ¨ç”»
 		Timeline timeline = new Timeline();
 
 		for (Node circle : circles.getChildren()) {
 			timeline.getKeyFrames()
 					.addAll(new KeyFrame(Duration.ZERO, // set start position at
-														// 0
-							new KeyValue(circle.translateXProperty(), Math.random() * 800),
-							new KeyValue(circle.translateYProperty(), Math.random() * 600)),
+									// 0
+									new KeyValue(circle.translateXProperty(), Math.random() * 800),
+									new KeyValue(circle.translateYProperty(), Math.random() * 600)),
 
 							new KeyFrame(new Duration(40000), // set end
-																// position at
-																// 40s
+									// position at
+									// 40s
 									new KeyValue(circle.translateXProperty(), Math.random() * 800),
 									new KeyValue(circle.translateYProperty(), Math.random() * 600)));
 		}

@@ -22,75 +22,75 @@ public class Label_Test1 extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		primaryStage.setTitle("LabelÁ·Ï°");
+		primaryStage.setTitle("Labelç»ƒä¹ ");
 		GridPane gridPane = new GridPane();
 		gridPane.setAlignment(Pos.CENTER);
 		gridPane.setHgap(10);
 		gridPane.setVgap(10);
 		gridPane.setPadding(new Insets(25, 25, 25, 25));
-		// ¿ªÊ¼Ìí¼ÓLabel
-		// 1¡¢Ò»¸ö¿ÕµÄLabel
+		// å¼€å§‹æ·»åŠ Label
+		// 1ã€ä¸€ä¸ªç©ºçš„Label
 		Label label1 = new Label();
-		label1.setText("ºóÌí¼ÓµÄLabelÄÚÈİ");
+		label1.setText("åæ·»åŠ çš„Labelå†…å®¹");
 		label1.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("label_search.jpg"))));
 		gridPane.add(label1, 0, 0);
 
-		// 2¡¢Ò»¸ö´øÎÄ±¾ÔªËØµÄLabel
+		// 2ã€ä¸€ä¸ªå¸¦æ–‡æœ¬å…ƒç´ çš„Label
 		Label label2 = new Label("Search");
 		gridPane.add(label2, 0, 1);
 		label2.setTextFill(Color.web("#0076a3"));
 
-		// 3¡¢Ò»¸ö´øÎÄ±¾ºÍÍ¼±êµÄLabel
+		// 3ã€ä¸€ä¸ªå¸¦æ–‡æœ¬å’Œå›¾æ ‡çš„Label
 //		Image image = new Image(getClass().getResourceAsStream("label_search.jpg"));
 //		Label label3 = new Label("Search", new ImageView(image));
 		Label label3 = new Label("Search");
 		gridPane.add(label3, 0, 2);
-		// ÉèÖÃÎÄ±¾ºÍÍ¼±êÖ®¼äµÄ¼ä¾à
+		// è®¾ç½®æ–‡æœ¬å’Œå›¾æ ‡ä¹‹é—´çš„é—´è·
 		label3.setGraphicTextGap(50);
-		// Ê¹ÓÃsetTextAlignment()·½·¨¸Ä±äÆä¶ÔÆë·½Ïò
+		// ä½¿ç”¨setTextAlignment()æ–¹æ³•æ”¹å˜å…¶å¯¹é½æ–¹å‘
 		label3.setTextAlignment(TextAlignment.RIGHT);
 		// setContentDisplay(ContentDisplay
-		// value)·½·¨¶¨ÒåÍ¼ĞÎÓëÎÄ±¾µÄÏà¶ÔÎ»ÖÃ£¬ContentDisplay³£Á¿µÄ¿ÉÑ¡ÖµÎª:¾Ó×óLEFT£¬¾ÓÓÒRIGHT£¬¾ÓÖĞCENTER£¬¾ÓÉÏTOP£¬¾ÓÏÂBOTTOM¡£
+		// value)æ–¹æ³•å®šä¹‰å›¾å½¢ä¸æ–‡æœ¬çš„ç›¸å¯¹ä½ç½®ï¼ŒContentDisplayå¸¸é‡çš„å¯é€‰å€¼ä¸º:å±…å·¦LEFTï¼Œå±…å³RIGHTï¼Œå±…ä¸­CENTERï¼Œå±…ä¸ŠTOPï¼Œå±…ä¸‹BOTTOMã€‚
 		label3.setContentDisplay(ContentDisplay.TOP);
 
-		Label label4 = new Label("Ê¹ÓÃFontÀàµÄ¹¹Ôìº¯ÊıÀ´¹¹ÔìFont¶ÔÏó");
-		// Ê¹ÓÃFontÀàµÄ¹¹Ôìº¯ÊıÀ´¹¹ÔìFont¶ÔÏó
+		Label label4 = new Label("ä½¿ç”¨Fontç±»çš„æ„é€ å‡½æ•°æ¥æ„é€ Fontå¯¹è±¡");
+		// ä½¿ç”¨Fontç±»çš„æ„é€ å‡½æ•°æ¥æ„é€ Fontå¯¹è±¡
 		label4.setFont(new Font("Arial", 30));
 		gridPane.add(label4, 0, 3);
 		//
 
-		Label label5 = new Label("Ê¹ÓÃFontÀàµÄfont¾²Ì¬·½·¨");
-		// Ê¹ÓÃFontÀàµÄfont¾²Ì¬·½·¨
+		Label label5 = new Label("ä½¿ç”¨Fontç±»çš„fonté™æ€æ–¹æ³•");
+		// ä½¿ç”¨Fontç±»çš„fonté™æ€æ–¹æ³•
 		label5.setFont(Font.font("Cambria", 32));
 		gridPane.add(label5, 0, 4);
-		
+
 		Label label6 = new Label("A label that needs to be wrapped hello ketty,good night");
 		label6.setFont(Font.font("Cambria", 32));
 		label6.setWrapText(true);
 		gridPane.add(label6, 0, 5);
-		
-		
+
+
 		Label label7 = new Label("Values");
 		label7.setFont(new Font("Cambria", 32));
 		label7.setRotate(270);
 		label7.setTranslateY(50);
 		gridPane.add(label7, 0, 6);
-		
-		
+
+
 		Label label8 = new Label("Values");
 		label8.setFont(new Font("Cambria", 32));
-		
+
 //		label8.setOnMouseEntered((MouseEvent e){
 //		    label8.setScaleX(1.5);
 //		    label8.setScaleY(1.5);
 //		});
-//		 
+//
 //		label8.setOnMouseExited((MouseEvent e){
 //		    label8.setScaleX(1);
 //		    label8.setScaleY(1);
 //		});
 
-		
+
 		gridPane.setGridLinesVisible(true);
 		Scene scene = new Scene(gridPane, 500, 800);
 		primaryStage.setScene(scene);
