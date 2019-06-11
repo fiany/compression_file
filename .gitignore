@@ -3,3 +3,4 @@
 .idea/
 javaFx.iml
 /target/
+*.log
