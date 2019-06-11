@@ -53,7 +53,9 @@
 	<HBox spacing="10" alignment="bottom_right" GridPane.columnIndex="1"
 		GridPane.rowIndex="4">
 		<Button text="Sign In" onAction="#handleSubmitButtonAction" />
+		<Button text="open file" onAction="#openfile" />
 	</HBox>
+
 
 	<Text fx:id="actiontarget" GridPane.columnIndex="1"
 		GridPane.rowIndex="6" />

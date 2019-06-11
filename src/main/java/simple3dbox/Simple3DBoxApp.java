@@ -19,7 +19,7 @@ public class Simple3DBoxApp extends Application {
     public Parent createContent() throws Exception {
  
         // Box
-        Box testBox = new Box(5, 5, 5);
+        Box testBox = new Box(3, 5, 5);
         testBox.setMaterial(new PhongMaterial(Color.RED));
         testBox.setDrawMode(DrawMode.LINE);
  

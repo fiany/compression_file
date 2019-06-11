@@ -34,12 +34,30 @@ package com.burns.javafx.fxmlexample;
  
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.text.Text;
- 
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+
+import java.io.File;
+
 public class FXMLExampleController {
     @FXML private Text actiontarget;
-    
+
+    private Stage stage;
+
+    public void setStage(Stage stage){
+        this.stage = stage;
+    }
     @FXML protected void handleSubmitButtonAction(ActionEvent event) {
+        actiontarget.setText("Sign in button pressed");
+    }
+
+    @FXML protected void openfile(ActionEvent event) {
+        System.out.println("hello");
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        File file =fileChooser.showOpenDialog(stage);
         actiontarget.setText("Sign in button pressed");
     }
 

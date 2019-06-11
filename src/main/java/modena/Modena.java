@@ -92,15 +92,18 @@ import javax.imageio.ImageIO;
 
 public class Modena extends Application {
     public static final String TEST = "test";
+
     static {
         System.getProperties().put("javafx.pseudoClassOverrideEnabled", "true");
     }
+
     private static final String testAppCssUrl = Modena.class.getResource("TestApp.css").toExternalForm();
     private static String MODENA_STYLESHEET_URL;
     private static String MODENA_EMBEDDED_STYLESHEET_URL;
     private static String MODENA_STYLESHEET_BASE;
     private static String CASPIAN_STYLESHEET_URL;
     private static String CASPIAN_STYLESHEET_BASE;
+
     static {
         try {
             final String controlPath = "javafx/scene/control/Control.class";
@@ -128,8 +131,8 @@ public class Modena extends Application {
             } else {
                 MODENA_STYLESHEET_URL = jfxrtRoot + "com/sun/javafx/scene/control/skin/modena/modena.css";
             }
-            MODENA_STYLESHEET_BASE = MODENA_STYLESHEET_URL.substring(0,MODENA_STYLESHEET_URL.lastIndexOf('/')+1);
-            CASPIAN_STYLESHEET_BASE = CASPIAN_STYLESHEET_URL.substring(0,CASPIAN_STYLESHEET_URL.lastIndexOf('/')+1);
+            MODENA_STYLESHEET_BASE = MODENA_STYLESHEET_URL.substring(0, MODENA_STYLESHEET_URL.lastIndexOf('/') + 1);
+            CASPIAN_STYLESHEET_BASE = CASPIAN_STYLESHEET_URL.substring(0, CASPIAN_STYLESHEET_URL.lastIndexOf('/') + 1);
             MODENA_EMBEDDED_STYLESHEET_URL = MODENA_STYLESHEET_BASE + "modena-embedded-performance.css";
             System.out.println("MODENA_EMBEDDED_STYLESHEET_URL = " + MODENA_EMBEDDED_STYLESHEET_URL);
         } catch (MalformedURLException ex) {
@@ -154,15 +157,15 @@ public class Modena extends Application {
     private int fontSize = 13;
     private String styleSheetContent = "";
     private String styleSheetBase = "";
-    private ToggleButton modenaButton,retinaButton,rtlButton,embeddedPerformanceButton;
+    private ToggleButton modenaButton, retinaButton, rtlButton, embeddedPerformanceButton;
     private TabPane contentTabs;
     private boolean test = false;
     private boolean embeddedPerformanceMode = false;
     private final EventHandler<ActionEvent> rebuild = event -> Platform.runLater(() -> {
         updateUserAgentStyleSheet();
         rebuildUI(modenaButton.isSelected(), retinaButton.isSelected(),
-                  contentTabs.getSelectionModel().getSelectedIndex(),
-                  samplePageNavigation.getCurrentSection());
+                contentTabs.getSelectionModel().getSelectedIndex(),
+                samplePageNavigation.getCurrentSection());
     });
 
     private static Modena instance;
@@ -177,9 +180,9 @@ public class Modena extends Application {
 
     public void setRetinaMode(boolean retinaMode) {
         if (retinaMode) {
-            contentTabs.getTransforms().setAll(new Scale(2,2));
+            contentTabs.getTransforms().setAll(new Scale(2, 2));
         } else {
-            contentTabs.getTransforms().setAll(new Scale(1,1));
+            contentTabs.getTransforms().setAll(new Scale(1, 1));
         }
         contentTabs.requestLayout();
     }
@@ -199,7 +202,8 @@ public class Modena extends Application {
         }
     }
 
-    @Override public void start(Stage stage) throws Exception {
+    @Override
+    public void start(Stage stage) throws Exception {
         if (getParameters().getRaw().contains(TEST)) {
             test = true;
         }
@@ -211,7 +215,7 @@ public class Modena extends Application {
         outerRoot.setTop(buildMenuBar());
         outerRoot.setCenter(root);
         // build UI
-        rebuildUI(true,false,0, null);
+        rebuildUI(true, false, 0, null);
         // show UI
         Scene scene = new Scene(outerRoot, 1024, 768);
         scene.getStylesheets().add(testAppCssUrl);
@@ -228,14 +232,14 @@ public class Modena extends Application {
         Menu fontSizeMenu = new Menu("Font");
         ToggleGroup tg = new ToggleGroup();
         fontSizeMenu.getItems().addAll(
-            buildFontRadioMenuItem("System Default", null, 0, tg),
-            buildFontRadioMenuItem("Mac (13px)", "Lucida Grande", 13, tg),
-            buildFontRadioMenuItem("Windows 100% (12px)", "Segoe UI", 12, tg),
-            buildFontRadioMenuItem("Windows 125% (15px)", "Segoe UI", 15, tg),
-            buildFontRadioMenuItem("Windows 150% (18px)", "Segoe UI", 18, tg),
-            buildFontRadioMenuItem("Linux (13px)", "Lucida Sans", 13, tg),
-            buildFontRadioMenuItem("Embedded Touch (22px)", "Arial", 22, tg),
-            buildFontRadioMenuItem("Embedded Small (9px)", "Arial", 9, tg)
+                buildFontRadioMenuItem("System Default", null, 0, tg),
+                buildFontRadioMenuItem("Mac (13px)", "Lucida Grande", 13, tg),
+                buildFontRadioMenuItem("Windows 100% (12px)", "Segoe UI", 12, tg),
+                buildFontRadioMenuItem("Windows 125% (15px)", "Segoe UI", 15, tg),
+                buildFontRadioMenuItem("Windows 150% (18px)", "Segoe UI", 18, tg),
+                buildFontRadioMenuItem("Linux (13px)", "Lucida Sans", 13, tg),
+                buildFontRadioMenuItem("Embedded Touch (22px)", "Arial", 22, tg),
+                buildFontRadioMenuItem("Embedded Small (9px)", "Arial", 9, tg)
         );
         menuBar.getMenus().add(fontSizeMenu);
         return menuBar;
@@ -246,29 +250,33 @@ public class Modena extends Application {
     }
 
     private void updateUserAgentStyleSheet(boolean modena) {
-        final SamplePage.Section scrolledSection = samplePageNavigation==null? null : samplePageNavigation.getCurrentSection();
+        final SamplePage.Section scrolledSection = samplePageNavigation == null ? null : samplePageNavigation.getCurrentSection();
         styleSheetContent = modena ?
                 loadUrl(MODENA_STYLESHEET_URL) :
                 loadUrl(CASPIAN_STYLESHEET_URL);
         if (!modena &&
-            (baseColor == null || baseColor == Color.TRANSPARENT) &&
-            (backgroundColor == null || backgroundColor == Color.TRANSPARENT) &&
-            (accentColor == null || accentColor == Color.TRANSPARENT) &&
-            (fontName == null)) {
+                (baseColor == null || baseColor == Color.TRANSPARENT) &&
+                (backgroundColor == null || backgroundColor == Color.TRANSPARENT) &&
+                (accentColor == null || accentColor == Color.TRANSPARENT) &&
+                (fontName == null)) {
             // no customizations
-            System.out.println("USING NO CUSTIMIZATIONS TO CSS, stylesheet = "+(modena?"modena":"caspian"));
+            System.out.println("USING NO CUSTIMIZATIONS TO CSS, stylesheet = " + (modena ? "modena" : "caspian"));
 
             // load theme
-            setUserAgentStylesheet("internal:stylesheet"+Math.random()+".css");
-            if (root != null) root.requestLayout();
+            setUserAgentStylesheet("internal:stylesheet" + Math.random() + ".css");
+            if (root != null) {
+                root.requestLayout();
+            }
             // restore scrolled section
             Platform.runLater(() -> samplePageNavigation.setCurrentSection(scrolledSection));
             return;
         }
-        if (modena && embeddedPerformanceMode) styleSheetContent += loadUrl(MODENA_EMBEDDED_STYLESHEET_URL);
+        if (modena && embeddedPerformanceMode) {
+            styleSheetContent += loadUrl(MODENA_EMBEDDED_STYLESHEET_URL);
+        }
         styleSheetBase = modena ? MODENA_STYLESHEET_BASE : CASPIAN_STYLESHEET_BASE;
         styleSheetContent += "\n.root {\n";
-        System.out.println("baseColor = "+baseColor);
+        System.out.println("baseColor = " + baseColor);
         System.out.println("accentColor = " + accentColor);
         System.out.println("backgroundColor = " + backgroundColor);
         if (baseColor != null && baseColor != Color.TRANSPARENT) {
@@ -281,7 +289,7 @@ public class Modena extends Application {
             styleSheetContent += "    -fx-accent:" + colorToRGBA(accentColor) + ";\n";
         }
         if (fontName != null) {
-            styleSheetContent += "    -fx-font:"+fontSize+"px \""+fontName+"\";\n";
+            styleSheetContent += "    -fx-font:" + fontSize + "px \"" + fontName + "\";\n";
         }
         styleSheetContent += "}\n";
 
@@ -291,9 +299,11 @@ public class Modena extends Application {
         }
 
         // load theme
-        setUserAgentStylesheet("internal:stylesheet"+Math.random()+".css");
+        setUserAgentStylesheet("internal:stylesheet" + Math.random() + ".css");
 
-        if (root != null) root.requestLayout();
+        if (root != null) {
+            root.requestLayout();
+        }
 
         // restore scrolled section
         Platform.runLater(() -> samplePageNavigation.setCurrentSection(scrolledSection));
@@ -317,41 +327,41 @@ public class Modena extends Application {
             Tab tab1 = new Tab("All Controls");
             tab1.setContent(samplePageNavigation);
             Tab tab2 = new Tab("UI Mosaic");
-            tab2.setContent(new ScrollPane(mosaic = (Node)FXMLLoader.load(Modena.class.getResource("ui-mosaic.fxml"))));
+            tab2.setContent(new ScrollPane(mosaic = (Node) FXMLLoader.load(Modena.class.getResource("ui-mosaic.fxml"))));
 
             Tab tab3 = new Tab("Alignment Test");
             tab3.setContent(new ScrollPane(heightTest =
-                    (Node)FXMLLoader.load(Modena.class.getResource("SameHeightTest.fxml"))));
+                    (Node) FXMLLoader.load(Modena.class.getResource("SameHeightTest.fxml"))));
 
             Tab tab4 = new Tab("Simple Windows");
             tab4.setContent(new ScrollPane(simpleWindows = new SimpleWindowPage()));
 
             Tab tab5 = new Tab("Combinations");
             tab5.setContent(new ScrollPane(combinationsTest =
-                    (Node)FXMLLoader.load(Modena.class.getResource("CombinationTest.fxml"))));
+                    (Node) FXMLLoader.load(Modena.class.getResource("CombinationTest.fxml"))));
 
             // Customer example from bug report http://javafx-jira.kenai.com/browse/DTL-5561
             Tab tab6 = new Tab("Customer Example");
             tab6.setContent(new ScrollPane(customerTest =
-                    (Node)FXMLLoader.load(Modena.class.getResource("ScottSelvia.fxml"))));
+                    (Node) FXMLLoader.load(Modena.class.getResource("ScottSelvia.fxml"))));
 
             contentTabs.getTabs().addAll(tab1, tab2, tab3, tab4, tab5, tab6);
             contentTabs.getSelectionModel().select(selectedTab);
             samplePage.setMouseTransparent(test);
             // height test set selection for
             Platform.runLater(() -> {
-                for (Node n: heightTest.lookupAll(".choice-box")) {
-                    ((ChoiceBox)n).getSelectionModel().selectFirst();
+                for (Node n : heightTest.lookupAll(".choice-box")) {
+                    ((ChoiceBox) n).getSelectionModel().selectFirst();
                 }
-                for (Node n: heightTest.lookupAll(".combo-box")) {
-                    ((ComboBox)n).getSelectionModel().selectFirst();
+                for (Node n : heightTest.lookupAll(".combo-box")) {
+                    ((ComboBox) n).getSelectionModel().selectFirst();
                 }
             });
             // Create Toolbar
             retinaButton = new ToggleButton("@2x");
             retinaButton.setSelected(retina);
             retinaButton.setOnAction(event -> {
-                ToggleButton btn = (ToggleButton)event.getSource();
+                ToggleButton btn = (ToggleButton) event.getSource();
                 setRetinaMode(btn.isSelected());
             });
             ToggleGroup themesToggleGroup = new ToggleGroup();
@@ -395,13 +405,14 @@ public class Modena extends Application {
                     new Label("Accent:"),
                     createAccentColorPicker(),
                     new Separator(), saveButton, restartButton
-                    );
+            );
             toolBar.setId("TestAppToolbar");
             // Create content group used for scaleing @2x
             final Pane contentGroup = new Pane() {
-                @Override protected void layoutChildren() {
-                    double scale = contentTabs.getTransforms().isEmpty() ? 1 : ((Scale)contentTabs.getTransforms().get(0)).getX();
-                    contentTabs.resizeRelocate(0,0,getWidth()/scale, getHeight()/scale);
+                @Override
+                protected void layoutChildren() {
+                    double scale = contentTabs.getTransforms().isEmpty() ? 1 : ((Scale) contentTabs.getTransforms().get(0)).getX();
+                    contentTabs.resizeRelocate(0, 0, getWidth() / scale, getHeight() / scale);
                 }
             };
             contentGroup.getChildren().add(contentTabs);
@@ -417,7 +428,7 @@ public class Modena extends Application {
             simpleWindows.setModena(modena);
             // apply retina scale
             if (retina) {
-                contentTabs.getTransforms().setAll(new Scale(2,2));
+                contentTabs.getTransforms().setAll(new Scale(2, 2));
             }
             root.applyCss();
             // update state
@@ -441,7 +452,7 @@ public class Modena extends Application {
 
     public void setFont(String in_fontName, int in_fontSize) {
         System.out.println("===================================================================");
-        System.out.println("==   SETTING FONT TO "+in_fontName+" "+in_fontSize+"px");
+        System.out.println("==   SETTING FONT TO " + in_fontName + " " + in_fontSize + "px");
         System.out.println("===================================================================");
         fontName = in_fontName;
         fontSize = in_fontSize;
@@ -551,20 +562,20 @@ public class Modena extends Application {
         if (file != null) {
             try {
                 samplePage.getStyleClass().add("root");
-                int width = (int)(samplePage.getLayoutBounds().getWidth()+0.5d);
-                int height = (int)(samplePage.getLayoutBounds().getHeight()+0.5d);
-                BufferedImage imgBuffer = new BufferedImage(width,height,BufferedImage.TYPE_INT_ARGB);
+                int width = (int) (samplePage.getLayoutBounds().getWidth() + 0.5d);
+                int height = (int) (samplePage.getLayoutBounds().getHeight() + 0.5d);
+                BufferedImage imgBuffer = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
                 Graphics2D g2 = imgBuffer.createGraphics();
-                for (int y=0; y<height; y+=2048) {
+                for (int y = 0; y < height; y += 2048) {
                     SnapshotParameters snapshotParameters = new SnapshotParameters();
                     int remainingHeight = Math.min(2048, height - y);
-                    snapshotParameters.setViewport(new Rectangle2D(0,y,width,remainingHeight));
+                    snapshotParameters.setViewport(new Rectangle2D(0, y, width, remainingHeight));
                     WritableImage img = samplePage.snapshot(snapshotParameters, null);
-                    g2.drawImage(SwingFXUtils.fromFXImage(img,null),0,y,null);
+                    g2.drawImage(SwingFXUtils.fromFXImage(img, null), 0, y, null);
                 }
                 g2.dispose();
                 ImageIO.write(imgBuffer, "PNG", file);
-                System.out.println("Written image: "+file.getAbsolutePath());
+                System.out.println("Written image: " + file.getAbsolutePath());
             } catch (IOException ex) {
                 Logger.getLogger(Modena.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -575,7 +586,9 @@ public class Modena extends Application {
         launch(args);
     }
 
-    /** Utility method to load a URL into a string */
+    /**
+     * Utility method to load a URL into a string
+     */
     private static String loadUrl(String url) {
         StringBuilder sb = new StringBuilder();
         try {
@@ -604,38 +617,44 @@ public class Modena extends Application {
 //                Math.round(color.getGreen() * 255),
 //                Math.round(color.getBlue() * 255));
         return String.format((Locale) null, "rgba(%d, %d, %d, %f)",
-            (int) Math.round(color.getRed() * 255),
-            (int) Math.round(color.getGreen() * 255),
-            (int) Math.round(color.getBlue() * 255),
-            color.getOpacity());
+                (int) Math.round(color.getRed() * 255),
+                (int) Math.round(color.getGreen() * 255),
+                (int) Math.round(color.getBlue() * 255),
+                color.getOpacity());
     }
 
     /**
      * Simple URLConnection that always returns the content of the cssBuffer
      */
     private class StringURLConnection extends URLConnection {
-        public StringURLConnection(URL url){
+        public StringURLConnection(URL url) {
             super(url);
         }
 
-        @Override public void connect() throws IOException {}
+        @Override
+        public void connect() throws IOException {
+        }
 
-        @Override public InputStream getInputStream() throws IOException {
+        @Override
+        public InputStream getInputStream() throws IOException {
             return new ByteArrayInputStream(styleSheetContent.getBytes("UTF-8"));
         }
     }
 
     private class StringURLStreamHandlerFactory implements URLStreamHandlerFactory {
-        URLStreamHandler streamHandler = new URLStreamHandler(){
-            @Override protected URLConnection openConnection(URL url) throws IOException {
+        URLStreamHandler streamHandler = new URLStreamHandler() {
+            @Override
+            protected URLConnection openConnection(URL url) throws IOException {
                 if (url.toString().toLowerCase().endsWith(".css")) {
                     return new StringURLConnection(url);
                 } else {
-                    return new URL(styleSheetBase+url.getFile()).openConnection();
+                    return new URL(styleSheetBase + url.getFile()).openConnection();
                 }
             }
         };
-        @Override public URLStreamHandler createURLStreamHandler(String protocol) {
+
+        @Override
+        public URLStreamHandler createURLStreamHandler(String protocol) {
             if ("internal".equals(protocol)) {
                 return streamHandler;
             }
