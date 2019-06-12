@@ -8,7 +8,12 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
+import org.apache.commons.lang3.StringUtils;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -86,14 +91,67 @@ public class FileController {
             files.mkdirs();
         }
         for (File file : fileList) {
+            String newFilePath = file.getAbsolutePath().replace(folder, newFolder);
             try {
                 Thumbnails.of(file.getAbsolutePath())
                         .scale(1f)
                         .outputQuality(0.5f)
-                        .toFile(file.getAbsolutePath().replace(folder, newFolder));
+                        .toFile(newFilePath);
+                Thumbnails.of(newFilePath)
+                        .scale(1f)
+                        .watermark(Positions.BOTTOM_RIGHT, handleTextWaterMark("hello"), 1f)
+//                        .watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File("C:\\Users\\Administrator\\Desktop\\fsdownload\\nihao--副本\\happy.jpeg")), 1f)
+                        .outputQuality(0.8f)
+                        .toFile(newFilePath);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
+
+
+
+    /**
+     * @return java.awt.image.BufferedImage
+     * @throws
+     * @description 操纵文字型水印
+     * @params [address, dealerName, latitudeCommaLongitude, date]
+     */
+    private static BufferedImage handleTextWaterMark(String address) {
+
+        final Font font = new Font("SansSerif",Font.BOLD,30);
+
+        BufferedImage image = new BufferedImage(200, 50, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g = image.createGraphics();
+        image = g.getDeviceConfiguration().createCompatibleImage(200, 50, Transparency.TRANSLUCENT);
+
+        int y = 0;
+        int divider30 = 30;
+
+        g = image.createGraphics();
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setColor(Color.red);
+        g.setFont(font);
+
+        if (StringUtils.isNotBlank(address)) {
+            g.drawString("库存点地址：" + address, 5, y += divider30);
+        }
+
+        g.dispose();
+        return image;
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedImage hell = handleTextWaterMark("hell");
+        ImageIO.write(hell, "png", new File("C:\\Users\\Administrator\\Desktop\\fsdownload\\nihao--副本\\hel.jpg"));
+        String file = "C:\\Users\\Administrator\\Desktop\\fsdownload\\nihao--副本\\批注 2019-06-12 142522.png";
+        Thumbnails.of(file)
+                .scale(1f)
+                .watermark(Positions.BOTTOM_RIGHT, hell, 1f)
+//                        .watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File("C:\\Users\\Administrator\\Desktop\\fsdownload\\nihao--副本\\happy.jpeg")), 1f)
+                .outputQuality(0.8f)
+                .toFile(file);
+
+    }
+
 }
